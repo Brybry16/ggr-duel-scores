@@ -1,8 +1,5 @@
 const baseUrl = "https://game-server.geoguessr.com/api/duels/";
-let contestsList = {};
-let contestants = [];
 let duelID = null;
-let totalEntries = 0;
 let contentDiv = document.getElementById("content");
 
 
@@ -59,20 +56,3 @@ function printTable() {
 
     contentDiv.appendChild(table);
 }
-
-function setDownloadInterface() {
-    let csvContent = contestants.map(e => e.join(";")).join("\n");
-
-    let blob = new Blob(['\ufeff' + csvContent], {type: 'text/csv;charset=windows-1252;'});
-
-    let link = document.createElement("a");
-    link.setAttribute("href", URL.createObjectURL(blob));
-    link.setAttribute("download", "participations_" + tweetID + ".csv");
-
-	let status = document.getElementById("status");
-	status.innerHTML = totalEntries + " participations récupérées.<br>Téléchargement du fichier...";
-
-	link.click();
-}
-
-// window.onload = getFromDataURL(baseUrl + "list", getContestsDetails);
